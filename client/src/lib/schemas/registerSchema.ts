@@ -3,8 +3,8 @@ import { requiredString } from "../util/util";
 
 export const registerSchema = z.object({
 	email: z.email(),
-	displayName: requiredString("displayName"),
-	password: requiredString("password"),
+	displayName: requiredString("Display Name"),
+	password: requiredString("Password"),
 });
 
 export type RegisterSchema = z.infer<typeof registerSchema>;
