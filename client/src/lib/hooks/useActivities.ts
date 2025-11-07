@@ -127,6 +127,11 @@ export const useActivities = (id?: string) => {
 
 			return { prevActivity };
 		},
+		onSuccess: async () => {
+			await queryClient.invalidateQueries({
+				queryKey: ["activities"],
+			});
+		},
 		onError: (error, activityId, context) => {
 			console.log("prevActivity: " + context?.prevActivity);
 			console.log(error);
