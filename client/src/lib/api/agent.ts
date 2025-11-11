@@ -11,7 +11,7 @@ const sleep = (delay: number) => {
 
 const agent = axios.create({
 	baseURL: import.meta.env.VITE_API_URL,
-	withCredentials: true
+	withCredentials: true,
 });
 
 agent.interceptors.request.use((config) => {
@@ -45,7 +45,11 @@ agent.interceptors.response.use(
 				}
 				break;
 			case 401:
-				toast.error("Unauthorized");
+				if (data.detail === "NotAllowed") {
+					throw new Error(data.detail);
+				} else {
+					toast.error("Unauthorized");
+				}
 				break;
 			case 404:
 				router.navigate("/not-found");
